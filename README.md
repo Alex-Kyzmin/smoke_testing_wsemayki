@@ -19,8 +19,7 @@
 
 ## Как запустить проект:
 1. Клонировать репозиторий и перейти в него в командной строке:
-git clone https://github.com/Alex-Kyzmin/news_maker
-cd news_maker
+git clone https://github.com/Alex-Kyzmin/smoke_taeting_wsemayki.git
 
 2. Создать и активировать виртуальное окружение:
 python -m venv venv (py -3 -m venv venv)
@@ -30,11 +29,7 @@ source env/bin/activate(на Мас); source venv/Scripts/activate (на Вин�
 pip install -r requirements.txt
 python -m pip install --upgrade pip
 
-4. Выполнить миграции: 
-python manage.py migrate
-
-5. Запустить проект: 
-python manage.py runserver
-
+4. Перейти в директорию с тестами и запустить из
+cd tests & pytest -s -v
 
 ## Автор: Александр Кузьмин

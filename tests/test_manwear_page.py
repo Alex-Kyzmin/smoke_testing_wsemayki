@@ -11,7 +11,9 @@ from pages.manwear_page import ManWearPage
 """Настройка драйвера управления Chrome"""
 options = webdriver.ChromeOptions()
 options.add_experimental_option('detach', True)
-driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+driver = webdriver.Chrome(
+    options=options, service=Service(ChromeDriverManager().install())
+)
 
 # адреса тестируемых страниц
 manwear_url = 'https://www.vsemayki.ru/catalog/view/manwear'
@@ -51,7 +53,9 @@ def test_add_favorites():
     assert len(selected_product) == mp.get_amount_added()
     mp.enter_page(name_url=favorite_url)
     mp.get_element_page(locator=mp.loc_img_product_in_cart).click()
-    article_product_favorite = mp.get_element_page(locator=mp.loc_article_product).text
+    article_product_favorite = mp.get_element_page(
+        locator=mp.loc_article_product
+    ).text
     assert article_product_favorite in selected_product
 
 
@@ -86,7 +90,9 @@ def test_quick_add_cart():
     mp.method_quick_add_in_cart(selected_product)
     assert len(selected_product) == mp.get_amount_added()
     mp.enter_page(name_url=cart_url)
-    value_article_in_cart = mp.get_element_page(locator=mp.loc_article_in_cart).text
+    value_article_in_cart = mp.get_element_page(
+        locator=mp.loc_article_in_cart
+    ).text
     article_in_cart = value_article_in_cart.replace('Арт.', 'Артикул:')
     assert article_in_cart in selected_product
 
@@ -97,7 +103,9 @@ def test_delete_cart():
     mp = ManWearPage(driver)
     mp.enter_page(name_url=cart_url)
     mp.method_delete_in_cart()
-    warning_information = mp.get_element_page(locator=mp.loc_empty_in_cart).text
+    warning_information = mp.get_element_page(
+        locator=mp.loc_empty_in_cart
+    ).text
     assert warning_information == 'В Вашей корзине пока нет товаров'
 
 

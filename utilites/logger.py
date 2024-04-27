@@ -11,7 +11,8 @@ env = Env()
 
 class Logger:
     """Кастомный Logger"""
-    file_name = (os.getenv('path_logger') + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".log")
+    time_format = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    file_name = (os.getenv('path_logger') + str(time_format) + ".log")
 
     @classmethod
     def write_log_to_file(cls, data: str):

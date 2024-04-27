@@ -11,9 +11,11 @@ from pages.home_page import HomePage
 """Настройка драйвера управления Chrome"""
 options = webdriver.ChromeOptions()
 options.add_experimental_option('detach', True)
-# доп настройка в браузере Crome (позволяет работать со страницей без загрузки на 100%)
+# доп настройка (позволяет работать со страницей без загрузки на 100%)
 options.page_load_strategy = 'eager'
-driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+driver = webdriver.Chrome(
+    options=options, service=Service(ChromeDriverManager().install())
+)
 
 # url тестируемой страницы
 home_url = 'https://www.vsemayki.ru/'

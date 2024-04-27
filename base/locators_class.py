@@ -68,7 +68,7 @@ class ManWearPageLocator(CatalogPageLocator):
     # локатор артикула в карточке товара
     loc_article_product: str = '//span[@class="_2NM0iNH6"]'
     # локатор кнопки добавлено в избранное в разделе избранное
-    loc_btn_added_favorite: str = '//button[@class="_3inGxmJa _1tF2GquN _2kHaSAke"]'
+    loc_added_favor: str = '//button[@class="_3inGxmJa _1tF2GquN _2kHaSAke"]'
 
     # локатор изображения в карточке товара
     loc_img_product_in_cart: str = '//div[@class="_3vYFslUB"]'

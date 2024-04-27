@@ -27,7 +27,9 @@ class BasePageClass:
     def get_element_page(self, locator):
         """Getter обозначения элемента страницы"""
         return WebDriverWait(
-            self.driver, 20).until(ec.element_to_be_clickable((By.XPATH, locator)))
+            self.driver, 20).until(
+            ec.element_to_be_clickable((By.XPATH, locator))
+        )
 
     """Actions"""
     def action_move_to_element(self, locator):

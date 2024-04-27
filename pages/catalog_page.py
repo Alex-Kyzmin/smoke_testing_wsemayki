@@ -33,44 +33,59 @@ class CatalogPage(BasePageClass, CatalogPageLocator):
             locator=self.loc_img_after_action).get_attribute('src')
         # сравнение результатов
         assert image_before_action != image_after_action
-        Log.add_end_step(url=f'{self.driver.current_url}', method='method check change image')
+        Log.add_end_step(
+            url=f'{self.driver.current_url}',
+            method='method check change image'
+        )
         print('проверено изменение картинки товара при наведении мыши')
 
     def method_sort_size_filter(self):
         """method - проверки фильтра размера иконок товаров"""
         Log.add_start_step('method sort size filter')
         # получение атрибута изображения и название 1 товара до фильтрации
-        # так как по логике фильтра последовательность товаров не должна меняться
+        # так как по логике последовательность товаров не должна меняться
         image_before_sort = self.get_element_page(
             locator=self.loc_img).get_attribute('src')
-        name_before_sort = self.get_element_page(locator=self.loc_name_product).text
+        name_before_sort = self.get_element_page(
+            locator=self.loc_name_product).text
         # активация фильтра большого размера товара
         self.get_element_page(locator=self.loc_big_size_filter).click()
         # получение атрибута изображения и название 1 товара после фильтрации
         image_after_sort = self.get_element_page(
             locator=self.loc_img).get_attribute('src')
-        name_after_sort = self.get_element_page(locator=self.loc_name_product).text
+        name_after_sort = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
         # проверка на разность изображений и равность названий
-        assert image_before_sort != image_after_sort and name_before_sort == name_after_sort
+        assert (image_before_sort != image_after_sort
+                and name_before_sort == name_after_sort)
         # возврат размера иконок по умолчанию
         self.get_element_page(locator=self.loc_small_size_filter).click()
-        # получение атрибута изображения и название 1 товара после возврата первоначального фильтра
+        # получение атрибутов 1 товара после возврата фильтра
         image_after_return_sort = self.get_element_page(
             locator=self.loc_img).get_attribute('src')
-        name_after_return_sort = self.get_element_page(locator=self.loc_name_product).text
-        # проверка на равность атрибутов товара после возврата первоначального фильтра
-        assert image_before_sort == image_after_return_sort and name_before_sort == name_after_return_sort
-        Log.add_end_step(url=f'{self.driver.current_url}', method='method sort size filter')
+        name_after_return_sort = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
+        # проверка на равность атрибутов товара после возврата фильтра
+        assert (image_before_sort == image_after_return_sort
+                and name_before_sort == name_after_return_sort)
+        Log.add_end_step(
+            url=f'{self.driver.current_url}',
+            method='method sort size filter'
+        )
         print('проверены фильтры разных размеров иконок товаров')
 
     def method_sort_filter(self):
         """method - проверки фильтра популярное/новинки"""
         Log.add_start_step('method sort new filter')
         # получение атрибута изображения и название 1 товара до фильтрации
-        # так как по логике фильтра последовательность товаров должна измениться
+        # так как по логике фильтра последовательность должна измениться
         image_before_sort = self.get_element_page(
             locator=self.loc_img).get_attribute('src')
-        name_before_sort = self.get_element_page(locator=self.loc_name_product).text
+        name_before_sort = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
         # активация фильтра популярное/новинки товара
         self.get_element_page(locator=self.loc_filter).click()
         self.get_element_page(locator=self.loc_filter_change).click()
@@ -78,27 +93,36 @@ class CatalogPage(BasePageClass, CatalogPageLocator):
         time.sleep(2)
         image_after_sort = self.get_element_page(
             locator=self.loc_img).get_attribute('src')
-        name_after_sort = self.get_element_page(locator=self.loc_name_product).text
+        name_after_sort = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
         # проверка на разность атрибутов товара
-        assert image_before_sort != image_after_sort and name_before_sort != name_after_sort
+        assert (image_before_sort != image_after_sort
+                and name_before_sort != name_after_sort)
         # возврат фильтра по умолчанию
         self.get_element_page(locator=self.loc_filter).click()
         self.get_element_page(locator=self.loc_filter_change).click()
-        # получение атрибута изображения и название 1 товара после возврата первоначального фильтра
+        # получение атрибута изображения и название 1 товара после возврата
         time.sleep(2)
         image_after_return_sort = self.get_element_page(
             locator=self.loc_img).get_attribute('src')
-        name_after_return_sort = self.get_element_page(locator=self.loc_name_product).text
-        # проверка на равность атрибутов товара после возврата первоначального фильтра
-        assert image_before_sort == image_after_return_sort and name_before_sort == name_after_return_sort
+        name_after_return_sort = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
+        # проверка на равность атрибутов товара после возврата фильтра
+        assert (image_before_sort == image_after_return_sort
+                and name_before_sort == name_after_return_sort)
         # логирование метода
-        Log.add_end_step(url=f'{self.driver.current_url}', method='method sort new filter')
+        Log.add_end_step(
+            url=f'{self.driver.current_url}',
+            method='method sort new filter'
+        )
         print('проверены фильтры популярное/новинки')
 
     def method_quick_view_form(self):
         """method - открытия/закрытия формы быстрого просмотра товара"""
         Log.add_start_step('method quick view form')
-        # наведение мыши на товар для получения доступа к форме быстрого просмотра
+        # наведение мыши на товар для получения доступа к форме
         self.action_move_to_element(locator=self.loc_img).perform()
         # открываем форму быстрого просмотра товара
         self.get_element_page(locator=self.loc_quick_view).click()
@@ -106,26 +130,44 @@ class CatalogPage(BasePageClass, CatalogPageLocator):
         # подтверждающий снимок экрана
         self.method_make_screen(name_page='quick_view_product_form')
         # закрытие формы быстрого просмотра товара
-        self.get_element_page(locator=self.loc_btn_close_quick_view).click()
-        Log.add_end_step(url=f'{self.driver.current_url}', method='method quick view form')
+        self.get_element_page(
+            locator=self.loc_btn_close_quick_view
+        ).click()
+        Log.add_end_step(
+            url=f'{self.driver.current_url}',
+            method='method quick view form'
+        )
         print('проверена форма быстрого просмотра товара')
 
     def method_pagination_page(self):
         """method пагинации страницы"""
         Log.add_start_step('method pagination page')
         # получение названия 1 товара сраницы до пагинации
-        name_product_before_pag = self.get_element_page(locator=self.loc_name_product).text
+        name_product_before_pag = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
         # нажатие на кнопку следующая страница
-        self.action_move_to_element(locator=self.loc_next_page).click().perform()
+        self.action_move_to_element(
+            locator=self.loc_next_page
+        ).click().perform()
         # получение названия 1 товара сраницы после пагинации
-        name_product_after_pag = self.get_element_page(locator=self.loc_name_product).text
+        name_product_after_pag = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
         # сравнение на различность названий 1 товара на странице
         assert name_product_before_pag != name_product_after_pag
         # нажатие на кнопку пердыдущая страница
-        self.action_move_to_element(locator=self.loc_previous_page).click().perform()
+        self.action_move_to_element(
+            locator=self.loc_previous_page
+        ).click().perform()
         # получение названия 1 товара сраницы после возврата на страницу
-        name_product_return_pag = self.get_element_page(locator=self.loc_name_product).text
-        # сравнение на идентичность названий 1 товара после возврата на страницу
+        name_product_return_pag = self.get_element_page(
+            locator=self.loc_name_product
+        ).text
+        # сравнение названий 1 товара после возврата на страницу
         assert name_product_before_pag == name_product_return_pag
-        Log.add_end_step(url=f'{self.driver.current_url}', method='method pagination page')
+        Log.add_end_step(
+            url=f'{self.driver.current_url}',
+            method='method pagination page'
+        )
         print('проверена пагинация страниц каталога')

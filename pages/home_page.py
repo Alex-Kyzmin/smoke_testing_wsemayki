@@ -1,19 +1,11 @@
 from base.base_class import BasePageClass
-from base.locators_class import HomePageLocator
+from base.locators_class import GeneralPageLocator
 
 
-# url тестируемой страницы
-home_url = 'https://www.vsemayki.ru/'
-
-
-class HomePage(BasePageClass, HomePageLocator):
+class HomePage(BasePageClass, GeneralPageLocator):
     """Класс главной страницы сайта"""
 
-    def __init__(self, driver):
-        super().__init__(driver)
-
-    """Methods"""
-    def enter_site(self):
-        """method перехода на тестируемую страницу"""
-        self.driver.get(home_url)
-        self.driver.maximize_window()
+    """Actions"""
+    def action_click_link(self, locator):
+        """action - клик по ссылке"""
+        self.get_element_page(locator=locator).click()

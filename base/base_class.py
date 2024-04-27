@@ -1,21 +1,27 @@
+import os
+
 from datetime import datetime
+from dotenv import load_dotenv
+from environs import Env
+
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+
+from utilites.logger import Logger as Log
+
+
+load_dotenv()
+env = Env()
 
 
 class BasePageClass:
     """Базовый класс для страниц тестируемого сервиса"""
 
     def __init__(self, driver):
+        """Инициализатор класса"""
         self.driver = driver
-
-    # локатор кнопки подтверждения местоположения
-    btn_alert_loc: str = '//button[@data-autotest="component-6"]'
-    # локатор кнопки подтверждения файлов cookie
-    btn_accept_cookie_loc: str = '//button[@data-autotest="component-21"]'
-    # локатор кнопки подтверждения информации о "принтах"
-    btn_accept_info_loc: str = '//button[@class="_1bJ1Ky_4"]'
 
     """Getters"""
     def get_element_page(self, locator):
@@ -23,14 +29,21 @@ class BasePageClass:
         return WebDriverWait(
             self.driver, 20).until(ec.element_to_be_clickable((By.XPATH, locator)))
 
-    """Action"""
-    def action_accept_alerts(self):
-        """Action принимающий alerts"""
-        self.get_element_page(locator=self.btn_alert_loc).click()
-        self.get_element_page(locator=self.btn_accept_cookie_loc).click()
-        self.get_element_page(locator=self.btn_accept_info_loc).click()
+    """Actions"""
+    def action_move_to_element(self, locator):
+        """action - по наведению мыши на локатор"""
+        action = ActionChains(self.driver)
+        return action.move_to_element(self.get_element_page(locator=locator))
 
     """Methods"""
+    def enter_page(self, name_url):
+        """method перехода на тестируемую страницу"""
+        Log.add_start_step('enter page')
+        self.driver.get(name_url)
+        self.driver.maximize_window()
+        Log.add_end_step(url=f'{name_url}', method='enter page')
+        print('Запрос на переход на страницу получен')
+
     def method_assert_url(self, name_url):
         """Method подтверждения перехода на заданную веб-страницу"""
         assert self.driver.current_url == name_url
@@ -39,6 +52,6 @@ class BasePageClass:
     def method_make_screen(self, name_page: str):
         """Method получения текущего снимка экрана"""
         current_time = datetime.utcnow().strftime('%Y, %m, %d, %H, %M, %S')
-        path_file = 'C:\\Users\\Александр\\PycharmProjects\\VseMaykiTestingSite\\screen\\'
         screenshot_name = 'screen ' + name_page + ' ' + current_time + '.png'
-        self.driver.save_screenshot(path_file + screenshot_name)
+        self.driver.save_screenshot(os.getenv('path_screen') + screenshot_name)
+        print('Сделан подтверждающий снимок экрана')

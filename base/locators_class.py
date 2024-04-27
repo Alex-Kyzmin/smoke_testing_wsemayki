@@ -2,106 +2,94 @@ from dataclasses import dataclass
 
 
 @dataclass
-class HomePageLocator:
+class GeneralPageLocator:
     """Датакласс локаторов главной страницы"""
 
     # локатор кнопки подтверждения местоположения
-    btn_alert_loc: str = '//button[@data-autotest="component-6"]'
-    # локатор кнопки подтверждения файлов cookie
-    btn_accept_cookie: str = '//button[@data-autotest="component-21"]'
+    loc_btn_alert_locality: str = '//button[@data-autotest="component-6"]'
+    # локатор кнопки подтверждения принятия файлов cookie
+    loc_btn_accept_cookie: str = '//button[@data-autotest="component-21"]'
+    # локатор кнопки подтверждения информации о принтах
+    loc_btn_accept_info: str = '//button[@class="_1bJ1Ky_4"]'
 
     # локатор ссылки "Корпоративным клиентам"
-    link_corporate_client_loc: str = '//*[@id="__next"]/div/header/div/div[1]/div[2]/div/div[1]/div'
+    loc_link_corporate_client: str = '//a[@href="https://opt.vsemayki.ru/"]'
     # локатор ссылки "Блогерам"
-    link_bloggers_loc: str = '//*[@id="__next"]/div/header/div/div[1]/div[2]/div/div[2]/div'
+    loc_link_bloggers: str = '//a[@href="https://bloggers.vsemayki.ru/"]'
     # локатор ссылки "Вебмастерам"
-    link_webmasters_loc: str = '//*[@id="__next"]/div/header/div/div[1]/div[2]/div/div[3]/div'
+    loc_link_webmasters: str = '//a[@href="https://webmasters.vsemayki.ru/"]'
     # локатор ссылки "Дизайнерам"
-    link_designers_loc: str = '//*[@id="__next"]/div/header/div/div[1]/div[2]/div/div[4]/div'
+    loc_link_designers: str = '//a[@href="/landing/designer"]'
     # локатор ссылки "О нас"
-    link_about_loc: str = '//*[@id="__next"]/div/div[5]/div/div[1]/div[2]/div[2]/a[1]'
+    loc_link_about: str = '//a[@href="/doc/about"]'
+
+    # локатор подсчета количества товара в "избранном" и "корзине для покупок"
+    loc_amount_product: str = '//span[@class="H9B0OzDq"]'
 
 
 @dataclass
-class CatalogPageLocator:
+class CatalogPageLocator(GeneralPageLocator):
     """Датакласс локаторов страницы каталога"""
 
-    # локатор кнопки подтверждения местоположения
-    btn_alert_loc: str = '//button[@data-autotest="component-6"]'
-    # локатор кнопки подтверждения файлов cookie
-    btn_accept_cookie: str = '//button[@data-autotest="component-21"]'
-    btn_accept_info_loc: str = '//button[@class="_1bJ1Ky_4"]'
+    # локатор изображения товара
+    loc_img: str = '//img[@class="img-fluid _90Cp5Gp7"]'
+    # локатор изображения товара после наведения мыши
+    loc_img_after_action: str = '//img[@class="img-fluid showback _3A-DxGKu"]'
+    # локатор названия товара
+    loc_name_product: str = '//span[@class="_38-vDi9W card__title"]'
 
-    # локатор "мужской одежды"
-    man_wear_loc: str = '//*[@id="manwear"]'
+    # локатор быстрого просмотра карточки товара
+    loc_quick_view: str = '//div[text() = "Быстрый просмотр"]'
+    # локатор кнопки закрытия формы быстрого просмотра товара
+    loc_btn_close_quick_view: str = '//div[@class="_8tOwcCtC"]'
 
-    # локатор изображения 1 товара
-    first_product_image_loc: str = '//*[@id="content"]/div/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[1]/a/img[1]'
-    # локатор названия 1 товара
-    first_product_name_loc: str = '//*[@id="content"]/div/div[2]/div[2]/div[1]/div[2]/div[1]/div/a/div/span'
+    # локаторы фильтра размера иконок товара
+    loc_big_size_filter: str = '//div[@class="Yw3OIV4m _2jiPDrqc"]'
+    loc_small_size_filter: str = '//div[@class="Yw3OIV4m _38D5WGC_"]'
 
-    # локатор фильтра маленьких значков товара
-    small_paginate_filter_loc: str = '//div[@class="Yw3OIV4m _38D5WGC_"]'
-    # локатор фильтра крупных значков товара
-    big_paginate_filter_loc: str = '//div[@class="Yw3OIV4m _2jiPDrqc"]'
-    # локатор фильтра новинок/популярные
-    filter_loc: str = '//span[@data-autotest="Select"]'
-    # локаторы фильтра новинок/популярные
-    new_in_filter_loc: str = '//*[@id="content"]/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div/div/div/div[2]'
-    pop_in_filter_loc: str = '//*[@id="content"]/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div/div/div/div[1]'
+    # локаторы фильтра новинки/популярное
+    loc_filter: str = '//div[@data-autotest="Select-3"]'
+    loc_filter_change: str = '//div[@class="select-option--2fQbU"]'
+
     # локаторы пагинации следующая/предидущая
-    next_page_loc: str = '//a[@class="_33BvM8H- _2IwczoDq"]'
-    previous_page_loc: str = '//*[@id="content"]/div/div[2]/div[2]/div[1]/div[3]/div/a[1]'
+    loc_next_page: str = '(//i[@class="icon--2FMZ1"])[6]'
+    loc_previous_page: str = '(//i[@class="icon--2FMZ1"])[5]'
 
 
 @dataclass
-class WearPageLocator:
-    """Датакласс локаторов страниц каталогов продуктов"""
+class ManWearPageLocator(CatalogPageLocator):
+    """Датакласс локаторов мужских товаров"""
 
-    # локатор кнопки подтверждения местоположения
-    btn_alert_loc: str = '//button[@data-autotest="component-6"]'
-    # локатор кнопки подтверждения файлов cookie
-    btn_accept_cookie_loc: str = '//button[@data-autotest="component-21"]'
-    # локатор кнопки подтверждения информации о "принтах"
-    btn_accept_info_loc: str = '//button[@class="_1bJ1Ky_4"]'
+    # общий локатор товаров на странице
+    loc_generic_product: str = '(//div[@class="_3vYFslUB"])[$]'
 
-    # локатор ссылки "избранное"
-    link_favorite_loc: str = '//a[@href="/favorites"]'
-    # локатор подсчета товаров в "избранном"
-    span_amount_favorite_loc: str = '//span[@class="H9B0OzDq"]'
-    # локаторы названий добавленных товаров в избранное
-    first_added_prod_loc: str = '//*[@id="content"]/div/div/div[2]/div/div/div[1]/div/a/div/span'
-    second_added_prod_loc: str = '//*[@id="content"]/div/div/div[2]/div/div/div[2]/div/a/div/span'
-    # локатор добавленного товаров в избранное
-    added_btn_loc: str = '//*[@id="content"]/div/div/div[2]/div/div/div[1]/div/button'
+    # локатор кнопки добавить в избранное в карточке товара
+    loc_btn_add_favorite: str = '//div[@class="_3pSlocOO"]'
+    # локатор артикула в карточке товара
+    loc_article_product: str = '//span[@class="_2NM0iNH6"]'
+    # локатор кнопки добавлено в избранное в разделе избранное
+    loc_btn_added_favorite: str = '//button[@class="_3inGxmJa _1tF2GquN _2kHaSAke"]'
 
-    # локаторы атрибутов товара в карточке товара
-    vendor_code_cart_loc: str = '//*[@id="content"]/div[1]/div[2]/div[2]/div/div[1]/div[1]/div/div/span'
-    price_product_cart_loc: str = '//*[@id="content"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/span'
-    size_product_cart_loc: str = '//*[@id="content"]/div[1]/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/a[2]'
-    color_product_cart_loc: str = '//*[@id="content"]/div[1]/div[2]/div[2]/div/div[1]/div[3]/div/div[4]/li/span'
-    btn_add_basket_loc: str = '//*[@id="content"]/div[1]/div[2]/div[2]/div/div[2]/div[1]'
+    # локатор изображения в карточке товара
+    loc_img_product_in_cart: str = '//div[@class="_3vYFslUB"]'
+    # локатор кнопки добавлено в избранное в карточке товара
+    loc_btn_added_favorite_in_cart: str = '//div[@class="_3pSlocOO _3bhbhGhQ"]'
 
-    size_loc_alert = '/html/body/div[5]/div/div[1]/div/div/div[2]/div/div[2]/div[3]/div/div[1]/div/i/svg'
-    # локатор ссылки "корзины"
-    link_basket_loc: str = '//*[@id="__next"]/div/header/div/div[2]/div[5]/div[3]/a'
-    # локатор подсчета товаров в "корзины"
-    span_amount_basket_loc: str = '//*[@id="__next"]/div/header/div/div[2]/div[5]/div[3]/a/div/span'
+    # локатор артикула в форме товара
+    loc_article_in_form: str = '//span[@class="TzZcdK5N"]'
+    # локатор цены со скидками в форме товара
+    loc_price_in_form: str = '(//span[@class="price--1I8Le"])[1]'
+    # локатор размера товара в форме товара
+    loc_size_in_form: str = '(//a[@class="_16WXU0VI"])[1]'
 
-    # локаторы атрибутов 1 товара в корзине
-    vendor_code_1_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[1]/div[3]/div[2]'
-    price_1_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[1]/div[5]/div[1]/div/div[1]/span/span'
-    size_1_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[1]/div[3]/div[4]/div[1]/div/div[1]/div/span/div/div'
-    color_1_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[1]/div[3]/div[4]/div[1]/div/div[2]/div/span/div/div/span'
+    # локатор добавить товар в корзину
+    loc_btn_add_in_cart: str = '//*[text() = "Добавить в корзину"]'
 
-    # локаторы атрибутов 1 товара в корзине
-    vendor_code_2_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[2]/div[3]/div[2]'
-    price_2_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[2]/div[5]/div[1]/div/div[1]/span/span'
-    size_2_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[2]/div[3]/div[4]/div[1]/div/div[1]/div/span/div/div'
-    color_2_cart_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[2]/div[3]/div[4]/div[1]/div/div[2]/div/span/div/div/span'
-
-    # локатор удаления 3 товара из корзины
-    remove_3_product_loc: str = '//*[@id="content"]/div/div[1]/section/div[1]/div[3]/section[3]/div[3]/div[4]/div[2]/div[2]/span'
-
-    # локатор суммы заказа
-    order_price_loc: str = '//*[@id="content"]/div/div[1]/section/div[2]/div[2]/div[1]/div[2]/span/span'
+    # локатор артикула товара в корзине
+    loc_article_in_cart: str = '//div[@class="MJBRg4up"]'
+    # локатор кнопки удалить в корзине
+    loc_btn_delete_in_cart: str = '//span[text()="Удалить товар"]'
+    # локатор суммы заказа в корзине
+    loc_general_price_in_cart: str = '(//span[@class="price--1JTB7"])[1]'
+    # локатор оповещения "корзина пуста"
+    loc_empty_in_cart: str = '//p[@class="_3-XmRGcC"]'
